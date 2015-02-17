@@ -1,0 +1,15 @@
+<ion-view title="Map">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-refresh" ng-click="viewModel.reset()"></button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="list" ng-show="viewModel.state == 'saveSpot'">
+            <label class="item item-input">
+                <!--<span class="input-label">Spot Name</span>-->
+                <input type="text" ng-model="viewModel.spot.name" style="text-align: center;" placeholder="Spot Name" />
+            </label>
+        </div>
+        <button ng-show="viewModel.state == 'saveSpot'" class="button button-block button-positive" style="background-color: #FF003F!important; border-color: #FF003F!important;" ng-click="viewModel.saveSpot()">Save Spot</button>
+        <div id="map" data-tap-disabled="true" style="height: 800px; width: 100%;"></div>
+    </ion-content>
+</ion-view>
