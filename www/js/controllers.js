@@ -16,6 +16,8 @@ function MapCtrl($scope, $ionicLoading, $compile, $cordovaGeolocation, localStor
         vm.state = 'saveSpot';
         $scope.markedSpot.setMap(null);
         directionsDisplay.setMap(null);
+        localStorage.removeAll();
+        $rootScope.$broadcast('event:newSpot');
         //directionsDisplay.setDirections(null);
     };
 
@@ -29,7 +31,7 @@ function MapCtrl($scope, $ionicLoading, $compile, $cordovaGeolocation, localStor
             content: 'Getting current location...',
             showBackdrop: false
         });
-        /*$cordovaGeolocation
+        $cordovaGeolocation
             .getCurrentPosition({timeout: 10000, enableHighAccuracy: false})
             .then(function(pos) {
                 mapOptions.center = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
@@ -37,14 +39,14 @@ function MapCtrl($scope, $ionicLoading, $compile, $cordovaGeolocation, localStor
                 $ionicLoading.hide();
             }, function(err) {
                 vm.error = err;
-            });*/
-        navigator.geolocation.getCurrentPosition(function(pos) {
+            });
+        /*navigator.geolocation.getCurrentPosition(function(pos) {
             mapOptions.center = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
             $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
             $ionicLoading.hide();
         }, function(error) {
             alert('Unable to get location: ' + error.message);
-        });
+        });*/
     }
 
     init();
@@ -55,7 +57,7 @@ function MapCtrl($scope, $ionicLoading, $compile, $cordovaGeolocation, localStor
             showBackdrop: false
         });
 
-        navigator.geolocation
+        /*navigator.geolocation
             .getCurrentPosition(function(pos) {
                 var spot = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
                 localStorage.set(vm.spot.name, spot);
@@ -64,9 +66,9 @@ function MapCtrl($scope, $ionicLoading, $compile, $cordovaGeolocation, localStor
                 $rootScope.$broadcast('event:newSpot');
             }, function(error) {
                 alert('Unable to get location: ' + error.message);
-            });
+            });*/
 
-        /*$cordovaGeolocation
+        $cordovaGeolocation
            .getCurrentPosition({timeout: 10000, enableHighAccuracy: false})
            .then(function(pos) {
                 var spot = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
@@ -76,7 +78,7 @@ function MapCtrl($scope, $ionicLoading, $compile, $cordovaGeolocation, localStor
                 $rootScope.$broadcast('event:newSpot');
          }, function(err) {
                 vm.error = err;
-         });*/
+         });
 
     }
 
@@ -97,13 +99,13 @@ function MapCtrl($scope, $ionicLoading, $compile, $cordovaGeolocation, localStor
 
         spotWindow.open($scope.map, $scope.markedSpot);
 
-        navigator.geolocation
+        /*navigator.geolocation
             .getCurrentPosition(function(pos) {
                 var cl = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
                 var request = {
                     origin: cl,
                     destination: c,
-                    travelMode: google.maps.TravelMode.WALKING
+                    travelMode: google.maps.TravelMode.DRIVING
                 };
                 directionsService.route(request, function(response, status) {
                     if(status == google.maps.DirectionsStatus.OK) {
@@ -114,15 +116,15 @@ function MapCtrl($scope, $ionicLoading, $compile, $cordovaGeolocation, localStor
                 directionsDisplay.setMap($scope.map);
             }, function(error) {
                 alert('Unable to get location: ' + error.message);
-            });
-         /*$cordovaGeolocation
+            });*/
+         $cordovaGeolocation
             .getCurrentPosition({timeout: 10000, enableHighAccuracy: false})
             .then(function(pos) {
                  var cl = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
                  var request = {
                      origin: cl,
                      destination: c,
-                     travelMode: google.maps.TravelMode.WALKING
+                     travelMode: google.maps.TravelMode.DRIVING
                  };
                  directionsService.route(request, function(response, status) {
                      if(status == google.maps.DirectionsStatus.OK) {
@@ -133,7 +135,7 @@ function MapCtrl($scope, $ionicLoading, $compile, $cordovaGeolocation, localStor
                  directionsDisplay.setMap($scope.map);
             }, function(err) {
                 vm.error = err;
-            });*/
+            });
     });
 
     $scope.viewModel = vm;

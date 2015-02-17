@@ -35,6 +35,9 @@ function localStorage(window) {
             }
             return false;
         },
+        removeAll: function() {
+            window.localStorage['spotFinder'] = JSON.stringify([]);
+        },
         getAll: function() {
             return JSON.parse(window.localStorage['spotFinder']);
         }
