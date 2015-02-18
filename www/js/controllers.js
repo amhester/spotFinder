@@ -16,9 +16,6 @@ function MapCtrl($scope, $ionicLoading, $compile, $cordovaGeolocation, localStor
         vm.state = 'saveSpot';
         $scope.markedSpot.setMap(null);
         directionsDisplay.setMap(null);
-        localStorage.removeAll();
-        $rootScope.$broadcast('event:newSpot');
-        //directionsDisplay.setDirections(null);
     };
 
     function init() {
@@ -154,9 +151,16 @@ function MySpotsCtrl($scope, localStorage, state, $rootScope) {
     vm.showDelete = false;
     vm.removeSpot = removeSpot;
     vm.findSpot = findSpot;
+    vm.removeAll = removeAll;
 
-    function removeSpot(name) {
-        localStorage.remove(name);
+    function removeAll() {
+        localStorage.removeAll();
+        vm.spots = localStorage.getAll();
+    }
+
+    function removeSpot(spot) {
+        localStorage.remove(spot.name);
+        vm.spots = localStorage.getAll();
     }
 
     function findSpot(spot) {

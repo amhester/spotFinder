@@ -1,7 +1,10 @@
-<ion-view title="MySpots">
+<ion-view title="<span class='ion-ionic'></span> SpotFinder">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-trash-b" style="color: #fff" ng-click="viewModel.removeAll()"></button>
+    </ion-nav-buttons>
     <ion-content>
-        <ion-list show-delete="viewModel.showDelete">
-            <ion-item ng-repeat="spot in viewModel.spots" item="spot" ng-click="viewModel.findSpot(spot)" class="item-remove-animate">
+        <ion-list>
+            <ion-item ng-repeat="spot in viewModel.spots" item="spot" ng-click="viewModel.findSpot(spot)" class="item-remove-animate" on-swipe-left="viewModel.removeSpot(spot)">
                 {{ spot.name }} - (lat: {{ spot.coords.k }}; lng: {{ spot.coords.D }})
                 <ion-delete-button class="ion-minus-circled" ng-click="viewModel.removeSpot(spot.name)"></ion-delete-button>
             </ion-item>

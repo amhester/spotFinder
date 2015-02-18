@@ -1,14 +1,14 @@
 /* Empty. Add your own CSS if you like */
 ion-header-bar {
     background-color: #FF003F !important;
+    border: solid 1px #b3002c !important;
 }
 
 .title {
     color: #fff !important;
-    /*text-align: center !important;*/
 }
 
 .tab-nav {
-    background-color: #FF003F !important;
+    /*background-color: #FF003F !important;*/
 }
 

@@ -29,7 +29,7 @@ function localStorage(window) {
             for(var j = 0; j < spots.length; j++) {
                 if(spots[j].name == key) {
                     spots.splice(j, 1);
-                    window.localStorage['spotFinder'] = spots;
+                    window.localStorage['spotFinder'] = JSON.stringify(spots);
                     return true;
                 }
             }
