@@ -7,6 +7,7 @@ angular
 function MapCtrl($scope, $ionicLoading, $compile, $cordovaGeolocation, localStorage, $rootScope) {
     var directionsService = new google.maps.DirectionsService();
     var directionsDisplay = new google.maps.DirectionsRenderer();
+    var me = 'img/SpotFinderME2.png';
     var vm = {};
     vm.error = "";
     vm.saveSpot = saveCurrentLocation;
@@ -133,6 +134,30 @@ function MapCtrl($scope, $ionicLoading, $compile, $cordovaGeolocation, localStor
             }, function(err) {
                 vm.error = err;
             });
+
+        $scope.locationWatch = $cordovaGeolocation.watchPosition({
+            frequency: 1000,
+            timeout: 3000,
+            maximumAge: 3000,
+            enableHighAccuracy: false
+        });
+        $scope.locationWatch.then(null, function(err) {
+
+        }, function(pos) {
+            var mePos = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+            ($scope.meMarker) ? $scope.meMarker.setMap(null) : false;
+            if(!$scope.marker) {
+                $scope.meMarker = new google.maps.Marker({
+                    position: mePos,
+                    map: $scope.map,
+                    icon: me,
+                    title: 'me'
+                });
+            } else {
+                $scope.meMarker.setPosition(mePos);
+                $scope.meMarker.setMap($scope.map);
+            }
+        });
     });
 
     $scope.viewModel = vm;
