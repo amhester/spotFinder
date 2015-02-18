@@ -16,6 +16,7 @@ function MapCtrl($scope, $ionicLoading, $compile, $cordovaGeolocation, localStor
     vm.reset = function() {
         vm.state = 'saveSpot';
         $scope.markedSpot.setMap(null);
+        $scope.meMarker.setMap(null);
         directionsDisplay.setMap(null);
     };
 
